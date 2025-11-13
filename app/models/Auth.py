@@ -1,6 +1,6 @@
 from app.extensions import db,login_manager 
 from flask_login import UserMixin 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
 class Auth(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -25,6 +25,12 @@ class Auth(UserMixin,db.Model):
     def restore(self):
         self.deleted_at = None 
         db.session.commit()
+
+    def set_password(self,password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password,password)
 
     @property 
     def is_deleted(self):

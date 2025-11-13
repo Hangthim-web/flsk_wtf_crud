@@ -7,11 +7,11 @@ from flask_login import login_required
 
 auth_bp = Blueprint('auth',__name__,template_folder='templates')
 
-@auth_bp.routes('/register',methods=['GET','POST'])
+@auth_bp.route('/register',methods=['GET','POST'])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user,error = register_user(form.email.data,form.password.data)
+        user,error = register_user(form.username.data,form.email.data,form.password.data,form.address.data)
         if error:
             flash(error,'danger')
             return redirect(url_for('auth.register'))
