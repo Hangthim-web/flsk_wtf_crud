@@ -6,3 +6,4 @@ from wtforms.validators import DataRequired,Email,length,Optional
 class BlogForm(FlaskForm):
     title = StringField("title",validators=[DataRequired(),length(max=100)])
     description = StringField('description',validators=[Optional(),length(max=255)])
+    submit = SubmitField('Create')

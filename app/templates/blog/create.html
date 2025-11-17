@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% blog title %}create blogs{% endblock %}
+{% block title %}create blogs{% endblock %}
 {% block content %}
 <h2>Create Blog</h2>
 {% with messages=get_flashed_messages(with_categories=True) %}
@@ -13,6 +13,6 @@
     {{ form.hidden_tag() }}
     {{ form.title.label }}{{ form.title }}
     {{ form.description.label }}{{ form.description }}
-    {{ form.submit }}
+    {{ form.submit() }}
 </form>
 {% endblock %}

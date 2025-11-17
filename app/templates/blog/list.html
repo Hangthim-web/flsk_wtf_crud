@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% blog title %}List of blogs{% endblock %}
+{% block title %}List of blogs{% endblock %}
 {% block content %}
-<a href="{{ url_for('blog.create-blog') }}">Create new user </a>
+<a href="{{ url_for('blog.create') }}">Create new user </a>
 
 <ul>
     {% for blog in blogs %}
     <li>
         {{ blog.title }}({{ blog.description }})
-        <a href="{{ url_for('blog.edit') }}">Edit</a>
-        <a href="{{ url_for(blog.delete) }}">Delete</a>
+        <a href="">Edit</a>
+        <a href="">Delete</a>
     </li>
     
     
