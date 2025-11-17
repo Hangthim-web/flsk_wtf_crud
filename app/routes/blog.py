@@ -30,3 +30,34 @@ def create():
 def list_all_blogs__():
     blog_list = get_all_blogs()
     return render_template('blog/list.html',blogs=blog_list)
+
+@blog_bp.route('/edit-blog/<int:blog_id>',methods=['GET','POST'])
+@login_required 
+def edit_blog(blog_id):
+    blog = get_blog_by_id(blog_id)
+    # if blog.user_id != current_user.id:
+    #     flash('you are not allowed to edit this blog','danger')
+    #     return redirect(url_for('blog.list_all_blogs__'))
+
+    form = BlogForm(obj=blog)  #retain the original blog data.
+    if form.validate_on_submit():
+        update_blog(
+                    blog.id,
+                    form.title.data,
+                    form.description.data
+                    )
+        flash('Blog updated successfully','success')
+        return redirect(url_for('blog.list_all_blogs__'))
+    return render_template('blog/edit.html',form=form)
+
+@blog_bp.route('/delete-blog/<int:blog_id>',methods=['GET','POST'])
+@login_required
+def edit_blog(blog_id):
+    blog = get_blog_by_id(blog_id)
+    #   if blog.user_id != current_user.id:
+    #     flash("You are not allowed to edit this blog.", "danger")
+    #     return redirect(url_for('blog.list_all_blogs'))
+    delete_blog(blog.id)
+    flash("Blog Deleted Successfully",'success')
+    return redirect(url_for('blog.list_all_blogs__'))
+
