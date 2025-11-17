@@ -1,0 +1,34 @@
+##### allow access to certain routes for logged in users 
+
+from flask_login import login_required
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return "Welcome to your dashboard!"
+
+
+
+### protecting whole blueprint 
+from flask import Blueprint
+from flask_login import login_required
+
+blog_bp = Blueprint('blog', __name__)
+
+@blog_bp.before_request
+@login_required
+def require_login():
+    pass
+
+
+
+
+#### only allow admin or user 
+from flask_login import current_user
+
+@app.route("/admin")
+@login_required
+def admin_panel():
+    if not current_user.is_admin:
+        abort(403)
+    return "Admin Area"
