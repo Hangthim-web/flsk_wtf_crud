@@ -52,12 +52,12 @@ def edit_blog(blog_id):
 
 @blog_bp.route('/delete-blog/<int:blog_id>',methods=['GET','POST'])
 @login_required
-def edit_blog(blog_id):
-    blog = get_blog_by_id(blog_id)
+def delete_blog_route(blog_id):
+    # blog = get_blog_by_id(blog_id)
     #   if blog.user_id != current_user.id:
     #     flash("You are not allowed to edit this blog.", "danger")
     #     return redirect(url_for('blog.list_all_blogs'))
-    delete_blog(blog.id)
+    delete_blog(blog_id)
     flash("Blog Deleted Successfully",'success')
     return redirect(url_for('blog.list_all_blogs__'))
 
