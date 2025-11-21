@@ -2,7 +2,14 @@
 {% block title %}List of blogs{% endblock %}
 {% block content %}
 <a href="{{ url_for('blog.create') }}">Create New Blog </a>
-
+<h2>List All Blogs</h2>
+{% with messages=get_flashed_messages(with_categories=True)%}
+{% if messages %}
+{% for category,message in messages %}
+<span>{{ message }}</span>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <ul>
     {% for blog in blogs %}
     <li>

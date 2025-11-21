@@ -1,8 +1,12 @@
 from app.models.Blog import Blog 
 from app.extensions import db 
 
-def create_blog(title,description):
-    blog = Blog(title = title,description = description)
+def create_blog(title,description,user_id):
+    blog = Blog(
+        title = title,
+        description = description,
+        user_id = user_id
+        )
     db.session.add(blog)
     db.session.commit()
     return blog 

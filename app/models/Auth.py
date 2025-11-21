@@ -8,7 +8,7 @@ class Auth(UserMixin,db.Model):
     username = db.Column(db.String(100),nullable=False)
     password  =  db.Column(db.String(255),nullable=False)
     address = db.Column(db.String(255),nullable=True)
-    blogs = db.relationship('Blog',back_populates='user')
+    blogs = db.relationship('Blog',backref='author',lazy=True)
 
     created_at = db.Column(db.DateTime,default=datetime.utcnow)
     updated_at = db.Column(db.DateTime,default=datetime.utcnow,onupdate=datetime.utcnow)

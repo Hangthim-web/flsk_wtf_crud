@@ -10,8 +10,8 @@ class Blog(db.Model):
     updated_at = db.Column(db.DateTime,default=datetime.utcnow,onupdate=datetime.utcnow)
     deleted_at = db.Column(db.DateTime,default=datetime.utcnow)
     # Foreign key -> refers to User.id
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
-    user = db.relationship('User',back_populates='blogs')
+    user_id = db.Column(db.Integer,db.ForeignKey('auth.id'),nullable=False)
+    # user = db.relationship('Auth',back_populates='blog')
     def __repr__(self):
         return f'<Title {self.title}>'
     
